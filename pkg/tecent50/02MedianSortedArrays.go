@@ -8,6 +8,7 @@ import (
 // 思路：写一个循环，在里面判断是否到了中位数的位置；
 // 对于奇数和偶数判断合并，奇数中位数位置=length/2+1，偶数中位数位置=length/2和length/2+1，都遍历length/2+1次，
 // left记录上一次遍历的值，right记录最后一次遍历的值；奇数的中位数=right，偶数中位数=(left+right)/2
+// todo O(m+n) 解法：每次排除一个
 func findMedianSortedArrays(A []int, B []int) float64 {
 	m := len(A)
 	n := len(B)
@@ -38,6 +39,12 @@ func findMedianSortedArrays(A []int, B []int) float64 {
 	} else {
 		return float64(right)
 	}
+}
+
+// todo O(log(m+n)) 的二分法：递归和非递归方法，等价于 寻找第K小的数字（K=length/2）和第K+1小的数字；奇数: k=K+1，求两次相同的 K
+// 方法：每次排除掉一半的数字，第1~第K/2
+func getKth(A []int, start1 int, end1 int, B []int, start2 int, end2 int, k int) {
+
 }
 
 func main() {
