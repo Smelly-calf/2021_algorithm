@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // 两数相加: 两个非空链表表示两个非负整数，每位数字按照逆序方式存储，每个节点存一个数字。
 // 请你将两个数相加，并以相同形式返回一个表示和的链表。
@@ -43,55 +45,49 @@ func addTwoNumbers(l1 *Node, l2 *Node) *Node {
 	}
 
 	// 初始化新的链表和链表头指针pre，遍历链表节点相加
-	cur := &Node{}
 	pre := &Node{}
-	pre = cur
+	cur := pre
 	var carry int
 	for l1 != nil && l2 != nil {
-		cur.num = (carry + l1.num + l2.num) % 10
-		if l1.next != nil && l2.next != nil {
-			cur.next = &Node{0, nil} // l1.next和l2.next不为nil时，再初始化cur.next
-			cur = cur.next
-		}
-		carry = (carry + l1.num + l2.num) / 10 // carry=当前节点数字之和除10
+		i := carry + l1.num + l2.num
+		cur.next = &Node{num: i % 10} //初始化cur.next并赋第一个值
+		cur = cur.next
+
+		carry = i / 10 // carry=当前节点数字之和除10
 		l1 = l1.next
 		l2 = l2.next
 	}
 	if carry > 0 {
 		cur.next = &Node{num: carry}
 	}
-	return pre
+	return pre.next
 }
 
-// 思路2: 不对齐补零，每次遍历用sum(代表每个位的和的结果)加，节点的值=sum%10
+// 思路2: 不对齐补零，sum(代表每个位的和的结果)加上，考虑进位。
 func addTwoNums(l1 *Node, l2 *Node) *Node {
-	cur := &Node{}
 	pre := &Node{}
-	pre = cur
+	cur := pre
 	var carry int
-	var sum int
 	for l1 != nil || l2 != nil {
-		if l1 != nil && l2 != nil {
-			sum += carry + l1.num + l2.num
-			carry = sum / 10
-			cur.num = (carry + l1.num + l2.num) % 10
+		var sum int
+		if l1 != nil {
+			sum += l1.num
+			l1 = l1.next
 		}
-		if l1 == nil {
-
+		if l2 != nil {
+			sum += l2.num
+			l2 = l2.next
 		}
-		cur.num = (carry + l1.num + l2.num) % 10
-		if l1.next != nil && l2.next != nil {
-			cur.next = &Node{0, nil} // l1.next和l2.next不为nil时，再初始化cur.next
-			cur = cur.next
-		}
-		carry = (carry + l1.num + l2.num) / 10 // carry=当前节点数字之和除10
-		l1 = l1.next
-		l2 = l2.next
+		sum += carry
+		fmt.Println(sum)
+		cur.next = &Node{num: sum % 10}
+		carry = sum / 10
+		cur = cur.next
 	}
 	if carry > 0 {
 		cur.next = &Node{num: carry}
 	}
-	return pre
+	return pre.next
 }
 
 func CreateNode(arr []int) *Node {
@@ -114,7 +110,7 @@ func main() {
 	l1 := CreateNode(arr1)
 	l2 := CreateNode(arr2)
 	fmt.Println("create finished")
-	l3 := addTwoNumbers(l1, l2)
+	l3 := addTwoNums(l1, l2)
 	for l3 != nil { // 输出结果: 0742
 		fmt.Print(l3.num)
 		l3 = l3.next
