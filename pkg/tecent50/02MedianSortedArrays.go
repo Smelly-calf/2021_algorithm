@@ -21,7 +21,7 @@ func findMedianSortedArraysOmn(A []int, B []int) float64 {
 	//k: 合并数组指针
 	k := 1
 	for k <= length/2+1 {
-		// 如果 (A未到最后 && A位置的数字小于B位置的数字)，A数组后移；（相等时A后移或B后移是一样的）
+		// 如果 (A未到最后 && A位置的数字小于B位置的数字)，A数组后移；（相等时A后移 或 B后移是一样的）
 		// 考虑B数组到最后的情况，B数组到最后(j==n，因为B移动后j会+1，所以是j==n而不是n-1)或者A位置数字小于B位置数字(j==n 一定命中前者，因此不会越界)，A后移
 		left = right
 		if i < m && (j == n || A[i] <= B[j]) {
