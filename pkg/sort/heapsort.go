@@ -52,7 +52,7 @@ func swap(a []int, i int, j int) {
 }
 
 func main() {
-	a := []int{3, 5, 8, 1, 2, 10}
+	a := []int{3, 5, 8, 1, 2, 10} //生序排序
 	heapSort(a)
 	fmt.Println(a)
 }
