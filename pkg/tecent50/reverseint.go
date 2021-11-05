@@ -37,7 +37,7 @@ func reverse(x int) int {
 			return 0
 		}
 		rx = rx*10 + tmp // rx加的时候需要先乘以10
-		x = x / 10 // x除以10
+		x = x / 10       // x除以10
 	}
 	return rx
 }
