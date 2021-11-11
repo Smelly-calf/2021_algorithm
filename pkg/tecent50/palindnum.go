@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-// 回文整数
+// Easy - 回文整数
 // 思路：负数肯定不是回文；先反转x，得到rx，如果x与rx是相同的，那么这个数字就是回文数，反转时推入rx时考虑溢出.
 // 官方解法：反转一半的x，不用考虑溢出，终止条件是x小于等于反转后的数字，最后判断x=rx（偶数位）或者x=rx/10（奇数位）。
 func isPalindrome(x int) bool {
