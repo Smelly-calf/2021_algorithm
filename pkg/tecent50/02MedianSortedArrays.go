@@ -72,8 +72,7 @@ func getKth(A []int, start1 int, end1 int, B []int, start2 int, end2 int, k int)
 	if len1 == 0 { // len==0 代表 中位数在B
 		return float64(B[start2+k-1])
 	}
-	if k == 1 { // k==1 代表什么
-		// ? 为什么是 start1 和 start2
+	if k == 1 { // k==1
 		return math.Min(float64(A[start1]), float64(B[start2]))
 	}
 
