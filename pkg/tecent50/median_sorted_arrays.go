@@ -62,7 +62,7 @@ func findMedianSortedArraysOlogmn(A []int, B []int) float64 {
 }
 
 func getKth(A []int, start1 int, end1 int, B []int, start2 int, end2 int, k int) float64 {
-	// 寻找第k小数字, 比较A[k/2]和B[k/2]，排除掉 k/2 个数字
+	// 寻找第k小数字, 比较A[k/2]和B[k/2]，每次排除掉 k/2 个数字
 	len1 := end1 - start1 + 1
 	len2 := end2 - start2 + 1
 	if len1 > len2 {
