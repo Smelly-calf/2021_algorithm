@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 // Easy - 有效的括号
 // 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效：左括号必须用相同类型的右括号闭合，左括号必须以正确的顺序闭合。
 
@@ -11,36 +9,15 @@ import "fmt"
 //	2.注意pop时判断溢出；
 // 	3.遍历结束后栈长度如果>0返回false。
 
-// 栈: 数组，push和pop方法
-type myStack struct {
-	chars []uint8
-	len   int
-}
-
-func (t *myStack) push(char uint8) {
-	t.len++
-	t.chars = append(t.chars, char)
-}
-
-func (t *myStack) pop() uint8 {
-	if t.len == 0 {
-		return 0
-	}
-	last := t.chars[t.len-1]
-	t.len--
-	t.chars = t.chars[:t.len]
-	return last
-}
-
 func myIsValid(s string) bool {
-	st := myStack{}
-	isLeft := func(c uint8) bool {
+	st := stack{}
+	isLeft := func(c byte) bool {
 		if c == '(' || c == '{' || c == '[' {
 			return true
 		}
 		return false
 	}
-	isMatch := func(a uint8, b uint8) bool {
+	isMatch := func(a byte, b byte) bool {
 		if a == '(' && b == ')' || a == '{' && b == '}' || a == '[' && b == ']' {
 			return true
 		}
@@ -55,8 +32,8 @@ func myIsValid(s string) bool {
 			continue
 		}
 		// last是左括号，s[i]是右括号
-		last := st.pop() // 考虑当字符串一开始是右括号时
-		if !isMatch(last, s[i]) {
+		last := st.pop() // 考虑栈溢出
+		if !isMatch(last.(byte), s[i]) {
 			return false
 		}
 	}
@@ -67,25 +44,3 @@ func myIsValid(s string) bool {
 	return true
 }
 
-func main() {
-	//s := "()"
-	s1 := "()[]{}"
-	//s2 := "(]"
-	//s3 := "([)]"
-	//s4 := "{[]}"
-	//fmt.Println(s, " is ", myIsValid(s))
-	fmt.Println(s1, " is ", myIsValid(s1))
-	//fmt.Println(s2, " is ", myIsValid(s2))
-	//fmt.Println(s3, " is ", myIsValid(s3))
-	//fmt.Println(s4, " is ", myIsValid(s4))
-	//
-	//s5 := "["
-	//fmt.Println(s5, " is ", myIsValid(s5))
-	//
-	//s6 := "]"
-	//fmt.Println(s6, " is ", myIsValid(s6))
-
-	s7 := "([]"
-	fmt.Println(s7, " is ", myIsValid(s7))
-
-}

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 )
+// https://leetcode-cn.com/problems/merge-two-sorted-lists/solution/yi-kan-jiu-hui-yi-xie-jiu-fei-xiang-jie-di-gui-by-/
 
 func addTwoNumbersTest() {
 	arr1 := []int{9, 9, 9, 9, 9, 9, 9}
@@ -23,9 +24,11 @@ func mergeTwoListsTest() {
 	arr2 := []int{1, 3, 4}
 	l1 := CreateLinkedList(arr1)
 	l2 := CreateLinkedList(arr2)
-	TraverseLinkedList(mergeTwoLists(l1, l2))
+	//TraverseLinkedList(mergeTwoLists(l1, l2))
+	TraverseLinkedList(mergeTwoListsLoop(l1, l2))
 }
 
 func main() {
+	//addTwoNumbersTest()
 	mergeTwoListsTest()
 }

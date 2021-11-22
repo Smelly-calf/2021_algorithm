@@ -55,8 +55,3 @@ func reverseS(s string) string {
 	}
 	return string(reverse)
 }
-
-func main() {
-	s := "caba"
-	fmt.Println("最长回文子串:", longestPalindrome(s))
-}

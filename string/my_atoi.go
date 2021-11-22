@@ -100,15 +100,3 @@ func myAtoi(s string) int {
 	return am.sign * am.ans
 }
 
-func main() {
-	s := "42"               // 预期: 42
-	s1 := "   -42"          // -42
-	s2 := "4193 with words" // 4193
-	s3 := "words and 987"   // 0
-	s4 := "-91283472332"    //  -2^31 = -2147483648
-	fmt.Println(myAtoi(s))
-	fmt.Println(myAtoi(s1))
-	fmt.Println(myAtoi(s2))
-	fmt.Println(myAtoi(s3))
-	fmt.Println(myAtoi(s4))
-}
