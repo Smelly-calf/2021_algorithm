@@ -2,6 +2,7 @@ package main
 
 import "2021_algorithm/common"
 
+// https://leetcode-cn.com/problems/merge-two-sorted-lists/solution/yi-kan-jiu-hui-yi-xie-jiu-fei-xiang-jie-di-gui-by-/
 func hanotaTest() {
 	A, B, C := []int{2, 1, 0}, []int{}, []int{}
 	hanota(A, B, C)
