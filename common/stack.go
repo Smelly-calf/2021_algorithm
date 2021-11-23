@@ -1,4 +1,4 @@
-package main
+package common
 
 import (
 	"fmt"
@@ -6,17 +6,17 @@ import (
 )
 
 // 栈: 数组，push和pop，create方法
-type stack struct {
+type Stack struct {
 	elems []interface{}
 	len   int
 }
 
-func (s *stack) push(e interface{}) {
+func (s *Stack) Push(e interface{}) {
 	s.len++
 	s.elems = append(s.elems, e)
 }
 
-func (s *stack) pop() interface{} {
+func (s *Stack) Pop() interface{} {
 	if s.len == 0 {
 		return -1
 	}
@@ -26,20 +26,28 @@ func (s *stack) pop() interface{} {
 	return last
 }
 
-func createStack(arr interface{}) *stack {
-	st := stack{}
+func (s *Stack) Empty() bool{
+	if s.len == 0 {
+		return true
+	}
+	return false
+}
+
+func CreateStack(arr interface{}) *Stack {
+	st := Stack{}
 	if reflect.TypeOf(arr).Kind() != reflect.Slice {
 		panic("wrong input type")
 	}
 	realArr := reflect.ValueOf(arr)
 	for i := 0; i < realArr.Len(); i++ {
-		st.push(realArr.Index(i))
+		st.Push(realArr.Index(i))
 	}
 	return &st
 }
 
-func (s *stack) traverse() {
+func (s *Stack) Traverse() {
 	for s.len > 0 {
-		fmt.Println(s.pop())
+		fmt.Printf("%v ", s.Pop())
 	}
+	fmt.Println()
 }
