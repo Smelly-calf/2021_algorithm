@@ -1,6 +1,9 @@
 package main
 
-import "2021_algorithm/common"
+import (
+	"2021_algorithm/common"
+	"fmt"
+)
 
 // https://leetcode-cn.com/problems/merge-two-sorted-lists/solution/yi-kan-jiu-hui-yi-xie-jiu-fei-xiang-jie-di-gui-by-/
 func hanotaTest() {
@@ -24,8 +27,15 @@ func swapPairsTest() {
 	common.TraverseLinkedList(newL)
 }
 
+func createBinaryTreeTest() {
+	tree := common.CreateBinaryTree([]int{3, 9, 20, -1, -1, 15, 7})
+	levelRes := common.LevelOrder(tree)
+	fmt.Printf("%+v", levelRes)
+}
+
 func main() {
 	//hanotaTest()
 	//mergeTwoListsTest()
-	swapPairsTest()
+	//swapPairsTest()
+	createBinaryTreeTest()
 }
