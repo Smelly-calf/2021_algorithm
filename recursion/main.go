@@ -2,6 +2,7 @@ package main
 
 import (
 	"2021_algorithm/common"
+	"2021_algorithm/common/binary_tree"
 	"fmt"
 )
 
@@ -28,8 +29,8 @@ func swapPairsTest() {
 }
 
 func createBinaryTreeTest() {
-	tree := common.CreateBinaryTree([]int{3, 9, 20, -1, -1, 15, 7})
-	levelRes := common.LevelOrder(tree)
+	tree := binary_tree.CreateBinaryTree([]int{3, 9, 20, -1, -1, 15, 7})
+	levelRes := binary_tree.LevelOrderWithDfs(tree)
 	fmt.Printf("%+v", levelRes)
 }
 
