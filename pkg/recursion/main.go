@@ -1,7 +1,6 @@
 package main
 
 import (
-	"2021_algorithm/binary_tree"
 	"2021_algorithm/common"
 	"fmt"
 )
@@ -28,15 +27,15 @@ func swapPairsTest() {
 	common.TraverseLinkedList(newL)
 }
 
-func createBinaryTreeTest() {
-	tree := common.CreateBinaryTree([]int{3, 9, 20, -1, -1, 15, 7})
-	levelRes := binary_tree.LevelOrderWithDfs(tree)
-	fmt.Printf("%+v", levelRes)
+func binaryTreeMaxDepthTest() {
+	nums := []int{3, 9, 20, -1, -1, 15, 7}
+	tree := common.CreateBinaryTree(nums)
+	fmt.Println("二叉树最大深度：", MaxDepthWithBFS(tree))
 }
 
 func main() {
 	//hanotaTest()
 	//mergeTwoListsTest()
 	//swapPairsTest()
-	createBinaryTreeTest()
+	binaryTreeMaxDepthTest()
 }

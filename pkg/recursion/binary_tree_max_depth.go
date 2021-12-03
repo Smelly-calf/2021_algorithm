@@ -34,8 +34,8 @@ func MaxDepthWithBFS(root *common.TreeNode) int {
 	return ans
 }
 
-func main() {
-	nums := []int{3, 9, 20, -1, -1, 15, 7}
-	tree := common.CreateBinaryTree(nums)
-	fmt.Println("二叉树最大深度：", MaxDepthWithBFS(tree))
+func createBinaryTreeTest() {
+	tree := common.CreateBinaryTree([]int{3, 9, 20, -1, -1, 15, 7})
+	levelRes := LevelOrderWithDfs(tree)
+	fmt.Printf("%+v", levelRes)
 }
