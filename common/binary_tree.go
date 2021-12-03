@@ -1,4 +1,4 @@
-package binary_tree
+package common
 
 // TreeNode 二叉树的结点
 // 二叉树的增删改，遍历，遍历包括前序、中序、后序、层序，遍历方法两种：深度优先搜索dfs、广度优先搜索bfs
