@@ -1,7 +1,5 @@
 package common
 
-import "fmt"
-
 type ListNode struct {
 	Num  int
 	Next *ListNode
@@ -19,9 +17,11 @@ func CreateLinkedList(arr []int) *ListNode {
 	return l
 }
 
-func TraverseLinkedList(l *ListNode) {
+func TraverseLinkedList(l *ListNode) []int {
+	arr := []int{}
 	for l != nil {
-		fmt.Println(l.Num)
+		arr = append(arr, l.Num)
 		l = l.Next
 	}
+	return arr
 }

@@ -1,11 +1,10 @@
 package common
 
 import (
-	"fmt"
 	"reflect"
 )
 
-// 栈: 数组，push和pop，create方法
+// Stack 栈: 数组，push和pop，create方法
 type Stack struct {
 	elems []interface{}
 	len   int
@@ -26,7 +25,7 @@ func (s *Stack) Pop() interface{} {
 	return last
 }
 
-func (s *Stack) Empty() bool{
+func (s *Stack) Empty() bool {
 	if s.len == 0 {
 		return true
 	}
@@ -45,9 +44,10 @@ func CreateStack(arr interface{}) *Stack {
 	return &st
 }
 
-func (s *Stack) Traverse() {
+func (s *Stack) Traverse() []interface{} {
+	arrs := []interface{}{}
 	for s.len > 0 {
-		fmt.Printf("%v ", s.Pop())
+		arrs = append(arrs, s.Pop())
 	}
-	fmt.Println()
+	return arrs
 }

@@ -15,7 +15,7 @@ import "2021_algorithm/common"
 // 写递归需要注意：写结束条件时考虑递归结束，写return语句时考虑回溯。
 
 /*
-递归函数: 合并两个链表中较小头结点与剩下元素的 merge 操作结果合并。
+递归函数: 合并两个链表中较小头结点与剩下元素的merge操作的结果。
 { list1[0]+merge(list1[1:],list2) list1[0]<list[2]
   list2[0]+merge(list1,list2[1:]) otherwise }
 终止条件: 如果两个链表有一个为空，递归结束。
@@ -63,7 +63,7 @@ func mergeTwoLists(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
 	}
 }
 
-// 循环解法：初始化虚拟头结点，prev指向虚拟头结点，同时遍历链表l1和l2，比较两个链表头结点值：较小的头结点插入prev结点，prev后移，循环结束条件是其中一个链表头节点为null。
+// 循环解法：初始化虚拟头结点，prev指向虚拟头结点，同时遍历链表l1和l2，比较两个链表头结点值：较小的头结点插入prev结点，prev后移，循环结束条件是其中一个链表头节点为null。最后返回虚拟头结点.next
 func mergeTwoListsLoop(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
 	l3 := &common.ListNode{} //设l3的地址是1，保留链表初始的地址
 	prev := l3               // prev此时的地址是1，在l3地址的基础上开始向后移动，但从l3出发可以遍历全部链表

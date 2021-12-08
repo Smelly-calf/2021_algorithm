@@ -2,8 +2,28 @@ package main
 
 import (
 	"2021_algorithm/common"
-	"fmt"
+	"math"
 )
+
+// MaxDepthWithDFS 深度优先搜索求解二叉树最大深度
+// 递归：二叉树的深度=max(左子树深度，右子树深度)+1，root=null递归结束返回0
+/* 3 -> 9 -> -1
+          -> -1
+	 -> 20 -> 15
+		   -> 7
+ */
+// 递归过程：
+// stack1: root=(3), root.left=(9), leftDepth := MaxDepthWithDFS((9))，由stack2得到leftDepth=1，继续递归求解root.right=(20)
+// stack2: root=(9), root.left=null, leftDepth := MaxDepthWithDFS((null))，得到leftDepth=0；root.right=null，得到rightDepth=0，return max(leftD,rightD)+1=1，代入stack1
+// 所以写return语句时考虑表达式右边函数的返回值，不考虑整个递归的返回值，也就是说不用考虑怎么存储中间值。
+func MaxDepthWithDFS(root *common.TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	leftDepth := MaxDepthWithDFS(root.Left)
+	rightDepth := MaxDepthWithDFS(root.Right)
+	return int(math.Max(float64(leftDepth), float64(rightDepth)) + 1)
+}
 
 // MaxDepthWithBFS 广度优先搜索求解二叉树最大深度
 // 广度优先搜索的队列里存放的是「当前层的所有节点」，每次拓展下一层的时候，
@@ -32,10 +52,4 @@ func MaxDepthWithBFS(root *common.TreeNode) int {
 		ans++
 	}
 	return ans
-}
-
-func createBinaryTreeTest() {
-	tree := common.CreateBinaryTree([]int{3, 9, 20, -1, -1, 15, 7})
-	levelRes := LevelOrderWithDfs(tree)
-	fmt.Printf("%+v", levelRes)
 }

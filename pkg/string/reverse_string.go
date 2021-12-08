@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-// Easy - 反转字符数组
+// Easy - 反转字符串
 // 双指针，遍历字符数组并交换反转前下标i 和 反转后下标 len-i-1 的值，遍历结束条件是i>=j
 func reverseString(s []byte) {
 	for i, j := 0, len(s)-1; i < j; i++ {

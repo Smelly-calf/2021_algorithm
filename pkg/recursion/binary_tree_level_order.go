@@ -2,7 +2,7 @@ package main
 
 import "2021_algorithm/common"
 
-// https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/solution/er-cha-shu-de-zui-da-shen-du-by-leetcode-solution/
+// https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/
 
 // LevelOrderWithDfs 二叉树的层序遍历之深度优先搜索
 // 初始化res二维数组的第一维，二维在递归时动态分配，level表示层。
@@ -33,8 +33,34 @@ func LevelOrderWithDfs(root *common.TreeNode) [][]int {
 	return res
 }
 
-// TODO LevelOrderWithBFS 层序遍历的广度优先搜索，从根结点开始，每次将一层的所有节点加入队列中。
-// 当遍历完某个节点左右孩子，需要回到它的父节点，遍历父节点右孩子的左右孩子，直到回到根结点，再遍历根结点右孩子。
+// LevelOrderWithBFS 广度优先搜索层序遍历二叉树
+// 方法一：哈希表，key为level，value为level对应节点值组成的数组
+// 方法二：
+// 		存储：两个队列q和p，分别存储第k层元素S_k(元素按照从左到右顺序排列好的)和第k+1层元素S_k+1
+// 		算法：首先根元素入队列，当队列不为空的时候: 求q的长度S_k，依次从队列中取S_k个元素进行拓展：即把S_k的元素加入到ret[k]，并且把S_k每个元素的左右孩子节点加入到p，最后把p赋值给q，进入下一次迭代，直到队列为空返回ret
 func LevelOrderWithBFS(root *common.TreeNode) [][]int {
-	return nil
+	ret := make([][]int, 0)
+	if root == nil {
+		return ret
+	}
+	q := []*common.TreeNode{root}
+	k := 0 //层下标
+	for len(q) > 0 {
+		ret = append(ret, []int{}) //初始化
+		var p []*common.TreeNode   // 存储由S_k拓展的S_k+1
+		// q元素依次出队
+		for j := 0; j < len(q); j++ {
+			node := q[j]
+			ret[k] = append(ret[k], node.Val)
+			if node.Left != nil {
+				p = append(p, node.Left)
+			}
+			if node.Right != nil {
+				p = append(p, node.Right)
+			}
+		}
+		q = p //把p赋值给q，拓展下一层元素
+		k++   // 进入下一次迭代
+	}
+	return ret
 }

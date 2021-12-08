@@ -36,7 +36,7 @@ func hanota(A []int, B []int, C []int) {
 
 func move(n int, A, B, C *common.Stack) {
 	if n == 1 {
-		C.Push(A.Pop()) //注意A.pop()不等于A[n-1]，但是否等于A[len(A)-1]呢
+		C.Push(A.Pop()) // 注意A.pop()不等于A[n-1]，但是否等于A[len(A)-1]呢
 		//if len(A) == 0 {
 		//	return
 		//}
@@ -44,7 +44,7 @@ func move(n int, A, B, C *common.Stack) {
 		//A = A[:len(A)-1]
 		return
 	}
-	move(n-1, A, C, B) //A中的n-1个盘子移动到B
+	move(n-1, A, C, B) // A中的n-1个盘子移动到B
 	C.Push(A.Pop())    // A中最大的盘子移动到C
 	//if len(A) > 0 {
 	//	fmt.Println("lenA=", len(A))
