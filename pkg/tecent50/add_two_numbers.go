@@ -46,8 +46,8 @@ func addTwoNumbers(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
 	cur := pre
 	var carry int
 	for l1 != nil && l2 != nil {
-		i := carry + l1.Num + l2.Num
-		cur.Next = &common.ListNode{Num: i % 10} //初始化cur.next并赋第一个值
+		i := carry + l1.Val + l2.Val
+		cur.Next = &common.ListNode{Val: i % 10} //初始化cur.next并赋第一个值
 		cur = cur.Next
 
 		carry = i / 10 // carry=当前节点数字之和除10
@@ -55,7 +55,7 @@ func addTwoNumbers(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
 		l2 = l2.Next
 	}
 	if carry > 0 {
-		cur.Next = &common.ListNode{Num: carry}
+		cur.Next = &common.ListNode{Val: carry}
 	}
 	return pre.Next
 }
@@ -68,21 +68,21 @@ func addTwoNums(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
 	for l1 != nil || l2 != nil {
 		var sum int
 		if l1 != nil {
-			sum += l1.Num
+			sum += l1.Val
 			l1 = l1.Next
 		}
 		if l2 != nil {
-			sum += l2.Num
+			sum += l2.Val
 			l2 = l2.Next
 		}
 		sum += carry
 		fmt.Println(sum)
-		cur.Next = &common.ListNode{Num: sum % 10}
+		cur.Next = &common.ListNode{Val: sum % 10}
 		carry = sum / 10
 		cur = cur.Next
 	}
 	if carry > 0 {
-		cur.Next = &common.ListNode{Num: carry}
+		cur.Next = &common.ListNode{Val: carry}
 	}
 	return pre.Next
 }
@@ -96,7 +96,7 @@ func main() {
 	fmt.Println("create finished")
 	l3 := addTwoNums(l1, l2)
 	for l3 != nil { // 输出结果: 0742
-		fmt.Print(l3.Num)
+		fmt.Print(l3.Val)
 		l3 = l3.Next
 	}
 }
