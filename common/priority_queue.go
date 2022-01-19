@@ -2,7 +2,7 @@ package common
 
 import "container/heap"
 
-// 实现优先级队列
+// 优先级队列，其实现原理是小顶堆
 // This example demonstrates a priority queue built using the heap interface.
 // Entry 是 priorityQueue 中的元素
 type Entry struct {
