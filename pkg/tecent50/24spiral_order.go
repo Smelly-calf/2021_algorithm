@@ -13,7 +13,7 @@ import "fmt"
 /*
 时间复杂度：遍历次数total=m*n，时间复杂度是 O(mn)
 空间复杂度：visited额外占用m*n空间，空间复杂度O(mn)
- */
+*/
 func spiralOrder(matrix [][]int) []int {
 	// 定义order数组存储遍历后元素，整体思想就是遍历矩阵，把元素不断追加到order数组。但是添加的顺序有一定规则：按照顺时针螺旋顺序。因此遍历不是按照矩阵行列。
 	// 遍历结束条件是order数组元素等于矩阵元素，所以循环条件设定为矩阵元素总和total。
@@ -54,10 +54,73 @@ func spiralOrder(matrix [][]int) []int {
 
 /*
 方法二：按层模拟
-不依赖辅助矩阵visited
+把矩阵分层，先遍历最外层，再遍历次外层。
+定义上下左右边界：top, bottom, left, right
+1）沿着上边界从left到right遍历顶点，top++
+2）如果上下边界交错，返回结果集；再沿着右边界从top到bottom遍历顶点，right--
+3）如果左右边界交错，返回结果集；沿着下边界从right到left遍历顶点，bottom--
+4）如果上下边界交错，返回结果集；沿着左边界从bottom到top，left++
+沿着左右边界时顶点为matrix[i][当前边界]
+沿着上下边界时顶点为matrix[当前边界][i]
 */
+func spiralOrderByLevel(matrix [][]int) []int {
+	if len(matrix) == 0 {
+		return []int{}
+	}
+	m := len(matrix)
+	n := len(matrix[0])
+	order := make([]int, 0, m*n)
+	// 定义上下左右边界
+	top := 0
+	bottom := m - 1
+	left := 0
+	right := n - 1
+	// 螺旋
+	// 1 2 3
+	// 4 5 6
+	// 7 8 9
+	for true {
+		// 沿着上边界从左向右遍历
+		for i := left; i <= right; i++ {
+			order = append(order, matrix[top][i])
+		}
+		top++
+		if top > bottom {
+			break
+		}
+		// 沿着右边界从上到下
+		for i := top; i <= bottom; i++ {
+			order = append(order, matrix[i][right])
+		}
+		right--
+		if right < left {
+			break
+		}
+		// 沿着下边界从右向左
+		for i := right; i >= left; i-- {
+			order = append(order, matrix[bottom][i])
+		}
+		bottom--
+		if top > bottom {
+			break
+		}
+		// 沿着左边界从下向上
+		for i := bottom; i >= top; i-- {
+			order = append(order, matrix[i][left])
+		}
+		left++
+		if right < left {
+			break
+		}
+	}
+	return order
+}
+
 func main() {
 	matrix := [][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}
 	order := spiralOrder(matrix)
-	fmt.Printf("matrix: %+v\n order: %+v", matrix, order)
+	fmt.Printf("matrix: %+v\n order: %+v\n", matrix, order)
+
+	order = spiralOrderByLevel(matrix)
+	fmt.Printf("matrix: %+v\n order: %+v\n", matrix, order)
 }

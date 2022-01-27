@@ -25,3 +25,18 @@ func TraverseLinkedList(l *ListNode) []int {
 	}
 	return arr
 }
+
+// ReverseLinkedList 链表反转
+func ReverseLinkedList(head *ListNode) *ListNode{
+	var newHead *ListNode
+	next := head.Next
+	for head != nil {
+		head.Next = newHead
+		newHead = head
+		head = next
+		if next != nil {
+			next = next.Next
+		}
+	}
+	return newHead
+}
