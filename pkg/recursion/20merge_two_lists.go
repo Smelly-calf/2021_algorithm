@@ -44,7 +44,7 @@ import "2021_algorithm/common"
 
 func mergeTwoLists(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
 	if l1 != nil && l2 != nil {
-		if l1.Num < l2.Num {
+		if l1.Val < l2.Val {
 			// l1.Next=merge(l1.Next, l2)
 			remainEleMerged := mergeTwoLists(l1.Next, l2)
 			l1.Next = remainEleMerged
@@ -64,15 +64,15 @@ func mergeTwoLists(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
 }
 
 // 循环解法：初始化虚拟头结点，prev指向虚拟头结点，同时遍历链表l1和l2，比较两个链表头结点值：较小的头结点插入prev结点，prev后移，循环结束条件是其中一个链表头节点为null。最后返回虚拟头结点.next
-func mergeTwoListsLoop(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
+func MergeTwoLists(l1 *common.ListNode, l2 *common.ListNode) *common.ListNode {
 	l3 := &common.ListNode{} //设l3的地址是1，保留链表初始的地址
 	prev := l3               // prev此时的地址是1，在l3地址的基础上开始向后移动，但从l3出发可以遍历全部链表
 	for l1 != nil && l2 != nil {
-		if l1.Num < l2.Num {
-			prev.Next = &common.ListNode{l1.Num, &common.ListNode{}} //必须是给 prev.Next 赋值，如果直接赋值给 prev 会丢失与 l3 的关联。
+		if l1.Val < l2.Val {
+			prev.Next = &common.ListNode{l1.Val, &common.ListNode{}} //必须是给 prev.Next 赋值，如果直接赋值给 prev 会丢失与 l3 的关联。
 			l1 = l1.Next                                             //l1向后移动，丢弃头结点
 		} else {
-			prev.Next = &common.ListNode{l2.Num, &common.ListNode{}}
+			prev.Next = &common.ListNode{l2.Val, &common.ListNode{}}
 			l2 = l2.Next //l2向后移动，丢弃头结点
 		}
 		prev = prev.Next //prev地址移动到2

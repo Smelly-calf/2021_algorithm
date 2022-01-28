@@ -19,8 +19,6 @@ import (
 	当a+b+c<target时，让b向右移动1，a+b+c变大从而更接近target，优化：b向右移动x次直到和b-1不等；
 	当a+b+c=target时，直接返回a+b+c的值。
 复杂度：第一重遍历N，第二重遍历N，O(N^2)
-1.res初始应该设为什么值？res初始为1e7的原因是：
-2.res的值应该在每次移动b和c之前更新，这样可以把初始的值也纳入进来
 */
 
 func threeSumClosest(nums []int, target int) int {

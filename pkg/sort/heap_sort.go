@@ -12,7 +12,6 @@ func heapSortWithLoop(a []int) {
 	up := func(a []int, s int, e int) {
 		for i := s; i <= e; i++ {
 			index := i
-			fmt.Println("index: ", index)
 			// 2parent+1=i => parent=(i-1)/2; 2parent+2=i => parent=(i-2)/2
 			for index > 0 {
 				var parent int
@@ -40,6 +39,40 @@ func heapSortWithLoop(a []int) {
 	}
 }
 
+// 迭代：从最后一个非叶子节点（设下标为 start）开始调整数组为大根堆，从父节点、左孩子、右孩子找最大的：比较左右孩子中较大的那个赋值给 left，如果父结点<孩子结点，交换父节点和孩子结点的值（元素下沉）。
+//	递归调整左右子树中较大的树，当left>=length结束递归。当start<=0，结束循环。
+// 调整：交换堆顶和堆尾元素，调整剩余堆为大根堆。
+func heapSortWithRecursion(nums []int) {
+	var down func(nums []int, i int, end int)
+	down = func(nums []int, i int, end int) {
+		if i >= end {
+			return
+		}
+		left := 2*i + 1
+		// left是孩子结点中最大的那个结点
+		if left+1 <= end && nums[left] < nums[left+1] {
+			left++
+		}
+		// 如果父节点小于孩子结点，小的元素下沉，交换父节点和孩子结点
+		if i <= end && left <= end && nums[i] < nums[left] {
+			swap(nums, i, left)
+		}
+		down(nums, left, end) // 被交换的孩子结点继续调整直到>=end
+	}
+	// 从最后一个非叶子节点开始通过小的元素下沉构造大根堆，2i+2==length-1 => i=(length-3)/2=length/2-1
+	for i := len(nums)/2 - 1; i >= 0; i-- {
+		down(nums, i, len(nums)-1)
+	}
+	// 固定堆顶元素到末尾
+	size := len(nums)
+	for size > 1 {
+		swap(nums, 0, size-1)
+		// 调整剩余堆：堆顶元素不断下沉
+		down(nums, 0, size-2)
+		size--
+	}
+}
+
 func swap(a []int, i int, j int) {
 	a[i], a[j] = a[j], a[i]
 }
@@ -47,5 +80,9 @@ func swap(a []int, i int, j int) {
 func main() {
 	a := []int{3, 5, 8, 1, 2, 10} //升序排序
 	heapSortWithLoop(a)
-	fmt.Println(a)
+	fmt.Printf("迭代：%#v\n", a)
+
+	a = []int{3, 5, 8, 1, 2, 10}
+	heapSortWithRecursion(a)
+	fmt.Printf("递归：%#v\n", a)
 }

@@ -13,9 +13,9 @@ import (
 		   -> 7
  */
 // 递归过程：
-// stack1: root=(3), root.left=(9), leftDepth := MaxDepthWithDFS((9))，由stack2得到leftDepth=1，继续递归求解root.right=(20)
+// stack1: root=(3), root.left=(9), leftDepth := MaxDepthWithDFS((9))，由stack2得到leftDepth=1，继续递归求解root.right=(20)的深度，也是1，最终得到深度=1+1=2
 // stack2: root=(9), root.left=null, leftDepth := MaxDepthWithDFS((null))，得到leftDepth=0；root.right=null，得到rightDepth=0，return max(leftD,rightD)+1=1，代入stack1
-// 所以写return语句时考虑表达式右边函数的返回值，不考虑整个递归的返回值，也就是说不用考虑怎么存储中间值。
+// 所以写return语句时考虑表达式右边函数的返回值，不需要考虑递归过程中的中间值存储。
 func MaxDepthWithDFS(root *common.TreeNode) int {
 	if root == nil {
 		return 0
